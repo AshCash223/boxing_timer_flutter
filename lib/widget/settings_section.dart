@@ -17,7 +17,7 @@ class TimerSettings extends StatelessWidget {
         children: [
           const Text(
             'Set Round Duration (Minutes)',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Slider(
             min: 1,
@@ -25,7 +25,7 @@ class TimerSettings extends StatelessWidget {
             value: timerState.roundDuration.toDouble(),
             divisions: 9,
             label: '${timerState.roundDuration} min',
-            activeColor: Colors.green, // Set the active part of the slider to green
+            activeColor: Colors.blue, // Set the active part of the slider to green
             onChanged: (value) {
               timerState.setRoundDuration(value.toInt());
             },
@@ -33,7 +33,7 @@ class TimerSettings extends StatelessWidget {
           const SizedBox(height: 20),
           const Text(
             'Set Rest Duration (Minutes)',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Slider(
             min: 1,
@@ -41,7 +41,7 @@ class TimerSettings extends StatelessWidget {
             value: timerState.restDuration.toDouble(),
             divisions: 9,
             label: '${timerState.restDuration} min',
-            activeColor: Colors.green, // Set the active part of the slider to green
+            activeColor: Colors.blue, 
             onChanged: (value) {
               timerState.setRestDuration(value.toInt());
             },
@@ -49,7 +49,7 @@ class TimerSettings extends StatelessWidget {
           const SizedBox(height: 20),
           const Text(
             'Set Number of Rounds',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Slider(
             min: 1,
@@ -57,7 +57,7 @@ class TimerSettings extends StatelessWidget {
             value: timerState.rounds.toDouble(),
             divisions: 9,
             label: '${timerState.rounds} rounds',
-            activeColor: Colors.green, // Set the active part of the slider to green
+            activeColor: Colors.blue, 
             onChanged: (value) {
               timerState.setRounds(value.toInt());
             },

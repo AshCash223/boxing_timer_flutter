@@ -14,17 +14,17 @@ class TimerHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Boxing Timer App'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue, // Set AppBar color to blue
       ),
       body: Container(
-        color: Colors.lime, // Set the background color to lime (you can adjust)
+        color: Colors.black, // Set the background color to black
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Timer Section
-            Expanded(
-              flex: 2,
+            Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -33,6 +33,7 @@ class TimerHomePage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white, // White text color
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -41,32 +42,51 @@ class TimerHomePage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white, // White text color
                     ),
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Reset Timer: ${timerState.rest_seconds ~/ 60}:${(timerState.rest_seconds % 60).toString().padLeft(2, '0')}',
+                    'Rest Timer: ${timerState.rest_seconds ~/ 60}:${(timerState.rest_seconds % 60).toString().padLeft(2, '0')}',
                     style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white, // White text color
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: timerState.toggleTimer,
-                    child: Text(timerState.isRunning ? 'Pause' : 'Start'),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: timerState.resetTimer,
-                    child: const Text('Reset'),
+                  const SizedBox(height: 40),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: timerState.toggleTimer,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, // Blue button color
+                        ),
+                        child: Text(
+                          timerState.isRunning ? 'Pause' : 'Start',
+                          style: const TextStyle(color: Colors.black), // Text color on button
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                        onPressed: timerState.resetTimer,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, // Blue button color
+                        ),
+                        child: const Text(
+                          'Reset',
+                          style: TextStyle(color: Colors.black), // Text color on button
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-
+            const SizedBox(height: 40),
             // Use TimerSettings widget
-            const TimerSettings(),  // Include the TimerSettings widget
+            const TimerSettings(), // Include the TimerSettings widget
           ],
         ),
       ),

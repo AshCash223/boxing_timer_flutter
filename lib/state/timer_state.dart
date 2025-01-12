@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TimerState with ChangeNotifier {
   int _roundDuration = 3; // default 3 minutes per round
   int _rounds = 3; // default 3 rounds
-  int _seconds = 0; // seconds left in the current round
+  int _seconds = 180; // default time else round skips at the start
   int _currentRound = 1; // the current round
   bool _isRunning = false;
   late Timer _timer;

@@ -10,8 +10,12 @@ class TimerSettings extends StatelessWidget {
     // Access TimerState via Provider
     final timerState = Provider.of<TimerState>(context);
 
-    return Expanded(
-      flex: 1,
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,7 +29,7 @@ class TimerSettings extends StatelessWidget {
             value: timerState.roundDuration.toDouble(),
             divisions: 9,
             label: '${timerState.roundDuration} min',
-            activeColor: Colors.blue, // Set the active part of the slider to green
+            activeColor: Colors.blue, // Set the active part of the slider to blue
             onChanged: (value) {
               timerState.setRoundDuration(value.toInt());
             },

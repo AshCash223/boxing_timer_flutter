@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:boxing_timer/state/timer_state.dart';
 import 'package:boxing_timer/widget/settings_section.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TimerHomePage extends StatelessWidget {
@@ -15,6 +15,60 @@ class TimerHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Boxing Timer App'),
         backgroundColor: Colors.blue, // Set AppBar color to blue
+        actions: [
+          // Settings Button (Icon) on the right side of the AppBar
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              // Show the TimerSettings widget in a custom popup
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    backgroundColor: Colors.black, // Set background color of the popup
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20), // Rounded corners for the popup
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min, // Ensure the dialog doesn't take up full screen
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Timer Settings',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            TimerSettings(),
+                            const SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Close the dialog
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue, // Blue button color
+                              ),
+                              child: const Text(
+                                'Close',
+                                style: TextStyle(color: Colors.black), // Text color on button
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: Container(
         color: Colors.black, // Set the background color to black
@@ -84,9 +138,6 @@ class TimerHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 40),
-            // Use TimerSettings widget
-            const TimerSettings(), // Include the TimerSettings widget
           ],
         ),
       ),

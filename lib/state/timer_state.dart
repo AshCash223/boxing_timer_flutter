@@ -1,54 +1,25 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 
-class TimerState extends ChangeNotifier {
-  int _seconds = 0;
+class TimerState with ChangeNotifier {
+  int _roundDuration = 3; // default 3 minutes per round
+  int _rounds = 3; // default 3 rounds
+  int _seconds = 0; // seconds left in the current round
+  int _currentRound = 1; // the current round
   bool _isRunning = false;
-  late Stopwatch _stopwatch;
-  Timer? _timer;
+  late Timer _timer;
 
-  // New properties for rounds and round duration
-  int _roundDuration = 5; // in minutes
-  int _rounds = 3;
-
-  int get seconds => _seconds;
-  bool get isRunning => _isRunning;
+  // Getters
   int get roundDuration => _roundDuration;
   int get rounds => _rounds;
+  int get seconds => _seconds;
+  int get currentRound => _currentRound;
+  bool get isRunning => _isRunning;
 
-  TimerState() {
-    _stopwatch = Stopwatch();
-  }
-
-  void toggleTimer() {
-    if (_isRunning) {
-      _stopwatch.stop();
-      _timer?.cancel();
-    } else {
-      _stopwatch.start();
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        updateTimer();
-      });
-    }
-    _isRunning = !_isRunning;
-    notifyListeners();
-  }
-
-  void resetTimer() {
-    _stopwatch.reset();
-    _seconds = 0;
-    _isRunning = false;
-    _timer?.cancel();
-    notifyListeners();
-  }
-
-  void updateTimer() {
-    _seconds = _stopwatch.elapsed.inSeconds;
-    notifyListeners();
-  }
-
-  void setRoundDuration(int minutes) {
-    _roundDuration = minutes;
+  // Setters
+  void setRoundDuration(int duration) {
+    _roundDuration = duration;
+    _seconds = _roundDuration * 60; // update seconds based on round duration
     notifyListeners();
   }
 
@@ -57,9 +28,39 @@ class TimerState extends ChangeNotifier {
     notifyListeners();
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+  // Start or Pause Timer
+  void toggleTimer() {
+    if (_isRunning) {
+      _timer.cancel();
+    } else {
+      _startTimer();
+    }
+    _isRunning = !_isRunning;
+    notifyListeners();
+  }
+
+  // Reset the timer
+  void resetTimer() {
+    _currentRound = 1;
+    _seconds = _roundDuration * 60;
+    _isRunning = false;
+    notifyListeners();
+  }
+
+  // Timer logic
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_seconds > 0) {
+        _seconds--;
+      } else {
+        if (_currentRound < _rounds) {
+          _currentRound++;
+          _seconds = _roundDuration * 60; // reset to round duration
+        } else {
+          _timer.cancel(); // stop the timer when all rounds are complete
+        }
+      }
+      notifyListeners();
+    });
   }
 }

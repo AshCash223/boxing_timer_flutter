@@ -38,12 +38,12 @@ class TimerSettings extends StatelessWidget {
           Slider(
             min: 1,
             max: 10,
-            value: timerState.roundDuration.toDouble(),
+            value: timerState.restDuration.toDouble(),
             divisions: 9,
-            label: '${timerState.roundDuration} min',
+            label: '${timerState.restDuration} min',
             activeColor: Colors.green, // Set the active part of the slider to green
             onChanged: (value) {
-              timerState.setRoundDuration(value.toInt());
+              timerState.setRestDuration(value.toInt());
             },
           ),
           const SizedBox(height: 20),

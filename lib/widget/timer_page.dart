@@ -37,7 +37,15 @@ class TimerHomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Time: ${timerState.seconds ~/ 60}:${(timerState.seconds % 60).toString().padLeft(2, '0')}',
+                    'Round Timer: ${timerState.round_seconds ~/ 60}:${(timerState.round_seconds % 60).toString().padLeft(2, '0')}',
+                    style: const TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Reset Timer: ${timerState.rest_seconds ~/ 60}:${(timerState.rest_seconds % 60).toString().padLeft(2, '0')}',
                     style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
